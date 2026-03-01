@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="To_Do_List.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="10"
+                     VerticalOptions="Fill"
+                     HorizontalOptions="Fill">
+
+            <!-- Input Section -->
+            <VerticalStackLayout Padding="10"
+                          Spacing="10"
+                          BackgroundColor="RosyBrown"
+                          Margin="0,0,0,10">
+
+                <Entry x:Name="titleEntry"
+                    Placeholder="Title"
+                    Keyboard="Text"
+                    ReturnType="Next"
+                    MaxLength="50"
+                    TextColor="Black"/>
+
+                <Editor x:Name="detailsEditor"
+                    Placeholder="Details"
+                    MaxLength="240"
+                    Keyboard="Text"
+                    HeightRequest="100"
+                        TextColor="Black"/>
+
+                <Button x:Name="addBtn"
+                    IsVisible="True"
+                    Text="Add"
+                    BackgroundColor="LightBlue"
+                    Clicked="AddToDoItem"/>
+
+                <Button x:Name="editBtn"
+                    IsVisible="False"
+                    Text="Edit"
+                    BackgroundColor="LightGray"
+                    Clicked="EditToDoItem"/>
+
+                <Button x:Name="cancelBtn"
+                    IsVisible="False"
+                    Text="Cancel Edit"
+                    BackgroundColor="LightCoral"
+                    Clicked="CancelEdit"/>
+
+            </VerticalStackLayout>
+
+            <!-- List -->
+            <CollectionView x:Name="todoCollectionView"
+                    VerticalOptions="FillAndExpand"
+                    SelectionMode="Single"
+                    SelectionChanged="OnItemSelected">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10"
+                            RowSpacing="5"
+                            ColumnSpacing="10">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0"
+                           Grid.Column="0"
+                           LineBreakMode="TailTruncation"
+                           FontSize="16"
+                           Text="{Binding title}" />
+
+                            <Label Grid.Row="1"
+                           Grid.Column="0"
+                           LineBreakMode="TailTruncation"
+                           FontSize="14"
+                           Text="{Binding detail}" />
+
+                            <Button Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Grid.Column="1"
+                            BackgroundColor="Transparent"
+                            CommandParameter="{Binding id}"
+                            Clicked="DeleteToDoItem">
+                                <Button.ImageSource>
+                                    <FileImageSource File="trash.png"/>
+                                </Button.ImageSource>
+                            </Button>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

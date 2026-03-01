@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="To-Do List/To_Do_List.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
